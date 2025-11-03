@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>城市女性喘息之地 - 女性友好社区</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- Google 字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --green:#4CAF50;
+  --green-light:#81C784;
+  --cream:#F5F5DC;
+  --brown:#8D6E63;
+  --text:#333;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Open Sans',sans-serif;color:var(--text);background:var(--cream);}
+h1,h2,h3{font-family:'Playfair Display',serif;}
+/* 顶部导航 */
+nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.9);backdrop-filter:blur(5px);z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:70px;border-bottom:1px solid var(--green-light);}
+nav .logo{font-size:24px;color:var(--green);font-weight:600;}
+nav ul{list-style:none;display:flex;gap:25px;}
+nav a{color:var(--text);text-decoration:none;transition:.3s;}
+nav a:hover{color:var(--green);}
+/* 首屏 Banner */
+.hero{height:100vh;background:url(https://images.unsplash.com/photo-1500530855697-b586f89aa3a?auto=format&fit=crop&w=1950&q=80) center/cover;background-attachment:fixed;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 5%;position:relative;}
+.hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(245,245,220,0.65);}
+.hero-content{position:relative;z-index:1;}
+.hero h1{font-size:48px;margin-bottom:20px;color:var(--green);}
+.hero p{font-size:20px;margin-bottom:30px;}
+.cta{background:var(--green);color:#fff;border:none;padding:14px 35px;border-radius:30px;font-size:16px;cursor:pointer;transition:.3s;}
+.cta:hover{transform:scale(1.05);}
+/* 理念区 */
+.philosophy{padding:80px 5%;background:#fff;text-align:center;}
+.philosophy h2{font-size:36px;margin-bottom:40px;color:var(--green);}
+.phi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:40px;}
+.phi-item{text-align:center;}
+.phi-icon{font-size:48px;color:var(--green);margin-bottom:15px;}
+.phi-item h3{margin-bottom:10px;font-size:20px;}
+/* 活动分类 */
+.activities{padding:80px 5%;background:var(--cream);}
+.activities h2{text-align:center;font-size:36px;margin-bottom:50px;color:var(--green);}
+.act-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:25px;}
+.act-card{background:#fff;border-radius:12px;padding:25px;text-align:center;cursor:pointer;transition:.3s;}
+.act-card:hover{transform:translateY(-5px);box-shadow:0 10px 20px rgba(0,0,0,.08);}
+.act-icon{font-size:40px;color:var(--green);margin-bottom:15px;}
+.act-card h3{font-size:18px;margin-bottom:10px;}
+/* 固定咨询 */
+.consult{position:fixed;bottom:30px;right:30px;background:var(--green);color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;box-shadow:0 5px 15px rgba(0,0,0,.2);z-index:998;transition:.3s;}
+.consult:hover{transform:scale(1.1);}
+/* 咨询弹窗 */
+.chat-window{position:fixed;bottom:100px;right:30px;width:350px;height:450px;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.2);display:none;flex-direction:column;z-index:999;font-size:14px;}
+.chat-header{background:var(--green);color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center;}
+.chat-body{flex:1;padding:15px;overflow-y:auto;background:var(--cream);}
+.chat-input{display:flex;border-top:1px solid #eee;}
+.chat-input input{flex:1;border:none;padding:12px;}
+.chat-input button{background:var(--green);color:#fff;border:none;padding:0 15px;cursor:pointer;}
+/* 页脚 */
+footer{padding:40px 5%;background:#fff;text-align:center;font-size:14px;color:var(--brown);}
+.social{margin-top:15px;}
+.social a{margin:0 10px;color:var(--green);font-size:20px;transition:.3s;}
+.social a:hover{color:var(--brown);}
+/* 响应式 */
+@media(max-width:768px){
+  .hero h1{font-size:32px;}
+  .act-grid{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+<!-- 导航 -->
+<nav>
+  <div class="logo">城市女性喘息之地</div>
+  <ul>
+    <li><a href="#philosophy">社区理念</a></li>
+    <li><a href="#activities">活动分类</a></li>
+    <li><a href="#contact">联系我们</a></li>
+  </ul>
+</nav>
+<!-- 首屏 Banner -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>城市女性的喘息之地 · 找回属于你的节奏</h1>
+    <p>定期主题活动｜自由交流空间｜专属成长支持</p>
+    <button class="cta" onclick="scrollToSection('activities')">探索活动</button>
+  </div>
+</section>
+<!-- 社区理念 -->
+<section id="philosophy" class="philosophy">
+  <h2>社区理念</h2>
+  <div class="phi-grid">
+    <div class="phi-item">
+      <div class="phi-icon"><i class="fas fa-leaf"></i></div>
+      <h3>远离压力</h3>
+      <p>在自然与绿意中放松身心，摆脱城市快节奏。</p>
+    </div>
+    <div class="phi-item">
+      <div class="phi-icon"><i class="fas fa-comments"></i></div>
+      <h3>真诚对话</h3>
+      <p>安全、非评判的空间，畅所欲言，彼此倾听。</p>
+    </div>
+    <div class="phi-item">
+      <div class="phi-icon"><i class="fas fa-seedling"></i></div>
+      <h3>共同成长</h3>
+      <p>通过主题沙龙、户外活动、兴趣工作坊，找到平衡。</p>
+    </div>
+  </div>
+</section>
+<!-- 活动分类 -->
+<section id="activities" class="activities">
+  <h2>活动分类</h2>
+  <div class="act-grid">
+    <div class="act-card" onclick="showActivity('dining')">
+      <div class="act-icon"><i class="fas fa-utensils"></i></div>
+      <h3>餐桌系列</h3>
+      <p>美食与咖啡中结识同频伙伴，分享生活故事。</p>
+    </div>
+    <div class="act-card" onclick="showActivity('hiking')">
+      <div class="act-icon"><i class="fas fa-hiking"></i></div>
+      <h3>户外徒步系列</h3>
+      <p>走进自然，用脚步释放压力，重新连接自我。</p>
+    </div>
+    <div class="act-card" onclick="showActivity('movie')">
+      <div class="act-icon"><i class="fas fa-film"></i></div>
+      <h3>电影系列</h3>
+      <p>通过电影讨论女性议题，看见更多可能性。</p>
+    </div>
+    <div class="act-card" onclick="showActivity('lastweek')">
+      <div class="act-icon"><i class="fas fa-calendar-week"></i></div>
+      <h3>上周活动</h3>
+      <p>回顾精彩瞬间，随时加入下一期。</p>
+    </div>
+    <div class="act-card" onclick="showActivity('thisweek')">
+      <div class="act-icon"><i class="fas fa-calendar-day"></i></div>
+      <h3>本周活动</h3>
+      <p>立即报名，抢占席位。</p>
+    </div>
+    <div class="act-card" onclick="showActivity('philosophy')">
+      <div class="act-icon"><i class="fas fa-heart"></i></div>
+      <h3>社区理念</h3>
+      <p>了解我们的价值与使命。</p>
+    </div>
+  </div>
+</section>
+<!-- 页脚 -->
+<footer id="contact">
+  <p>© 2024 城市女性喘息之地 | 地址：成都市高新区××路××号 | 微信：hercity2024</p>
+  <div class="social">
+    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" title="小红书"><i class="fab fa-xiaohongshu"></i></a>
+  </div>
+</footer>
+<!-- 固定咨询 -->
+<div class="consult" onclick="toggleChat()"><i class="fas fa-comments"></i></div>
+<div class="chat-window" id="chatWin">
+  <div class="chat-header"><span>立即咨询</span><span style="cursor:pointer" onclick="toggleChat()">×</span></div>
+  <div class="chat-body" id="chatBody">
+    <div style="background:#f0f0f0;padding:8px;border-radius:4px;margin-bottom:10px;font-size:14px;">客服：Hi！想参加哪类活动？</div>
+  </div>
+  <div class="chat-input"><input id="chatInput" placeholder="输入你的问题…"><button onclick="sendMsg()">发送</button></div>
+</div>
+<script>
+// 平滑滚动
+function scrollToSection(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+// 咨询窗口
+function toggleChat(){const w=document.getElementById('chatWin');w.style.display=w.style.display==='flex'?'none':'flex';}
+function sendMsg(){const i=document.getElementById('chatInput');if(!i.value.trim())return;const b=document.getElementById('chatBody');b.innerHTML+=`<div style="text-align:right;margin:8px 0;"><span style="background:var(--green);color:#fff;padding:6px 10px;border-radius:4px;">${i.value}</span></div>`;i.value='';b.scrollTop=b.scrollHeight;}
+// 活动弹窗（示例）
+function showActivity(type){
+  const acts={
+    dining:{title:'餐桌系列',desc:'在美食与咖啡中结识同频伙伴，分享生活故事。'},
+    hiking:{title:'户外徒步系列',desc:'走进自然，用脚步释放压力，重新连接自我。'},
+    movie:{title:'电影系列',desc:'通过电影讨论女性议题，看见更多可能性。'},
+    lastweek:{title:'上周活动',desc:'回顾精彩瞬间，随时加入下一期。'},
+    thisweek:{title:'本周活动',desc:'立即报名，抢占席位。'},
+    philosophy:{title:'社区理念',desc:'了解我们的价值与使命。'}
+  };
+  const a=acts[type];
+  const html=`
+    <div style="max-width:500px;margin:0 auto;background:#fff;border-radius:12px;padding:30px;text-align:center;">
+      <h2 style="color:var(--green);margin-bottom:15px;">${a.title}</h2>
+      <p style="line-height:1.8;margin-bottom:25px;">${a.desc}</p>
+      <button class="cta" onclick="alert('报名功能开发中，敬请期待！')">立即报名</button>
+      <div style="text-align:center;margin-top:15px;"><button onclick="document.body.removeChild(document.querySelector('.modal'))" style="background:var(--gray);color:#fff;border:none;padding:8px 20px;border-radius:4px;cursor:pointer;">关闭</button></div>
+    </div>
+  `;
+  const m=document.createElement('div');m.className='modal';m.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:2000;';m.innerHTML=html;document.body.appendChild(m);
+}
+</script>
+</body>
+</html>
+
