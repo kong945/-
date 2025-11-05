@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>红色政务服务中心</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+/* 中国红+鎏金+深空灰主题 */
+:root{--red:#E2231A;--gold:linear-gradient(135deg,#FFD700,#FFA500);--gray:#333;}
+@font-face{font-family:FZZhengHei;src:local("方正小标宋_GBK"),local("FZShaoSong_GBK");}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"阿里巴巴普惠体","Helvetica Neue",sans-serif;color:var(--gray);}
+h1,h2,h3{font-family:FZZhengHei,serif;}
+/* 导航 */
+nav{position:fixed;top:0;width:100%;background:var(--red);z-index:999;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:60px;}
+nav .logo{display:flex;align-items:center;color:#fff;font-size:20px;font-weight:bold;}
+nav .badge{background:var(--gold);color:var(--gray);padding:2px 10px;border-radius:15px;font-size:12px;margin-left:10px;}
+nav ul{list-style:none;display:flex;gap:25px;}
+nav a{color:#fff;text-decoration:none;transition:.3s;}
+nav a:hover{color:#FFD700;}
+/* 首屏大图 */
+.hero{height:100vh;background:radial-gradient(circle at 20% 50%,rgba(226,35,26,.3),transparent 50%),radial-gradient(circle at 80% 50%,rgba(255,215,0,.3),transparent 50%),#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:60px;position:relative;overflow:hidden;}
+.hero h1{font-size:48px;margin-bottom:20px;}
+.hero p{font-size:20px;margin-bottom:30px;}
+.hero .cta{background:var(--gold);color:var(--gray);border:none;padding:12px 30px;border-radius:30px;font-size:16px;cursor:pointer;transition:.3s;}
+.hero .cta:hover{transform:translateY(-3px);}
+/* 粒子红绸 */
+.particles{position:absolute;width:100%;height:100%;pointer-events:none;}
+.particle{position:absolute;width:4px;height:4px;background:#FFD700;border-radius:50%;animation:float 20s infinite linear;}
+@keyframes float{0%{transform:translateY(100vh) scale(0);}10%{transform:translateY(90vh) scale(1);}100%{transform:translateY(-10vh) scale(0);}}
+/* 数据看板 */
+.stats{display:flex;justify-content:center;gap:60px;margin:40px 0;font-size:18px;}
+.stat-item{text-align:center;}
+.stat-number{font-size:40px;color:var(--red);font-weight:bold;}
+/* 业务导航 */
+.services{padding:80px 5%;background:#f9f9f9;}
+.services h2{text-align:center;font-size:36px;margin-bottom:50px;color:var(--red);}
+.service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;}
+.service-card{background:#fff;border-radius:10px;padding:30px;text-align:center;cursor:pointer;transition:.3s;position:relative;overflow:hidden;border:2px solid transparent;}
+.service-card:hover{border-color:var(--red);transform:translateY(-5px);}
+.service-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:var(--gold);opacity:0;transition:opacity .3s;z-index:-1;}
+.service-card:hover::before{opacity:.1;}
+.service-icon{font-size:48px;margin-bottom:15px;}
+.service-card h3{margin-bottom:10px;font-size:24px;}
+.service-card p{font-size:14px;color:#666;}
+/* 政府背书 */
+.partners{padding:60px 5%;background:#fff;}
+.partners h2{text-align:center;font-size:36px;margin-bottom:40px;color:var(--red);}
+.partner-slider{display:flex;gap:20px;overflow-x:auto;padding:20px 0;}
+.partner-item{min-width:200px;height:100px;background:#f0f0f0;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;cursor:pointer;transition:.3s;}
+.partner-item:hover{background:var(--red);color:#fff;}
+/* 红色党建 */
+.party{background:var(--red);color:#fff;padding:60px 5%;text-align:center;}
+.party h2{font-size:36px;margin-bottom:20px;}
+.party-btn{background:#fff;color:var(--red);border:none;padding:12px 30px;border-radius:30px;font-size:16px;cursor:pointer;transition:.3s;}
+.party-btn:hover{transform:translateY(-3px);}
+/* 3D流程演示 */
+.demo3d{padding:60px 5%;background:#f9f9f9;text-align:center;}
+.demo3d h2{font-size:36px;margin-bottom:20px;color:var(--red);}
+.demo-screen{height:300px;background:var(--gray);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;position:relative;overflow:hidden;}
+.demo-step{position:absolute;opacity:0;transition:opacity .5s;}
+.demo-step.active{opacity:1;}
+.demo-controls{margin-top:20px;display:flex;gap:15px;justify-content:center;}
+.demo-btn{background:var(--red);color:#fff;border:none;padding:8px 20px;border-radius:5px;cursor:pointer;}
+/* 浮动咨询 */
+.consult{position:fixed;bottom:30px;right:30px;background:var(--gold);color:var(--gray);padding:12px 25px;border-radius:30px;cursor:pointer;box-shadow:0 5px 15px rgba(0,0,0,.2);z-index:998;font-weight:bold;}
+.chat-window{position:fixed;bottom:100px;right:30px;width:350px;height:450px;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.2);display:none;flex-direction:column;z-index:999;}
+.chat-header{background:var(--red);color:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center;}
+.chat-body{flex:1;padding:15px;overflow-y:auto;}
+.chat-input{display:flex;border-top:1px solid #eee;}
+.chat-input input{flex:1;border:none;padding:12px;}
+.chat-input button{background:var(--red);color:#fff;border:none;padding:0 15px;cursor:pointer;}
+/* 上传按钮 */
+.upload-btn{display:inline-block;margin-top:10px;background:var(--red);color:#fff;padding:6px 15px;border-radius:4px;cursor:pointer;font-size:14px;}
+/* 页脚 */
+footer{background:var(--gray);color:#fff;text-align:center;padding:30px 5%;font-size:14px;}
+/* 响应式 */
+@media(max-width:768px){
+  nav ul{display:none;}
+  .hero h1{font-size:32px;}
+  .service-grid{grid-template-columns:1fr;}
+  .stats{flex-direction:column;gap:20px;}
+  .chat-window{width:90%;right:5%;}
+}
+</style>
+</head>
+<body>
+<!-- 主导航 -->
+<nav>
+  <div class="logo">红色政务服务中心<span class="badge">政务级服务商</span></div>
+  <ul>
+    <li><a href="#services">业务服务</a></li>
+    <li><a href="#party">红色党建</a></li>
+    <li><a href="#demo">服务流程</a></li>
+    <li><a href="#contact">联系方式</a></li>
+  </ul>
+</nav>
+
+<!-- 首屏大图 -->
+<section class="hero">
+  <div class="particles" id="particles"></div>
+  <h1>专业政务级服务商</h1>
+  <p>提供全方位媒体宣传、会展活动、文创设计、舆情管理等一站式服务</p>
+  <button class="cta" onclick="scrollToServices()">了解我们的服务</button>
+  <div class="stats">
+    <div class="stat-item"><div class="stat-number">2876</div><div class="stat-label">年度舆情处理量</div></div>
+    <div class="stat-item"><div class="stat-number">58万㎡</div><div class="stat-label">会展承办面积</div></div>
+    <div class="stat-item"><div class="stat-number">500+</div><div class="stat-label">服务政企客户</div></div>
+  </div>
+</section>
+
+<!-- 六大业务 -->
+<section class="services" id="services">
+  <h2>核心业务</h2>
+  <div class="service-grid">
+    <div class="service-card" onclick="showDetail('media')">
+      <div class="service-icon">📢</div>
+      <h3>媒体宣传与运营</h3>
+      <p>专业提供媒体宣传与运营全链条服务，涵盖撰写新闻稿、官方平台宣传、多平台代运营、个人IP运营、MCN宣传等全方位服务</p>
+    </div>
+    <div class="service-card" onclick="showDetail('exhibition')">
+      <div class="service-icon">🎯</div>
+      <h3>会展论坛与活动</h3>
+      <p>专注会展论坛策划执行与企业特色活动定制服务，包含会展举办、宣传资料拍摄、高端论坛、企业年会、周年庆、运动会等</p>
+    </div>
+    <div class="service-card" onclick="showDetail('cultural')">
+      <div class="service-icon">🎨</div>
+      <h3>文创与展厅设计</h3>
+      <p>聚焦文创开发与空间视觉设计服务，涵盖景区文创设计、企业文创设计、企业展厅设计与安装、文化墙设计与安装等</p>
+    </div>
+    <div class="service-card" onclick="showDetail('opinion')">
+      <div class="service-icon">📊</div>
+      <h3>舆情管理和预警</h3>
+      <p>提供全流程舆情管理解决方案，包含多平台舆情监控、舆情报警、舆情引导与处理等专业服务</p>
+    </div>
+    <div class="service-card" onclick="showDetail('scenic')">
+      <div class="service-icon">🏞️</div>
+      <h3>景区活动策划</h3>
+      <p>专业景区活动策划服务，包含景区开幕式方案策划、节日策划、海报设计、活动宣传、宣传片拍摄与剪辑等</p>
+    </div>
+    <div class="service-card" onclick="showDetail('material')">
+      <div class="service-icon">📄</div>
+      <h3>各种宣传物料</h3>
+      <p>提供全链条宣传物料服务，包含宣传片拍摄与剪辑、宣传照片拍摄与精修、海报设计、沙盘模型建造、H5页面制作等</p>
+    </div>
+  </div>
+</section>
+
+<!-- 政府背书 -->
+<section class="partners">
+  <h2>合作政府机构</h2>
+  <div class="partner-slider">
+    <div class="partner-item">住房和城乡建设部</div>
+    <div class="partner-item">文化和旅游部</div>
+    <div class="partner-item">市人民政府</div>
+    <div class="partner-item">市委宣传部</div>
+    <div class="partner-item">市网信办</div>
+  </div>
+</section>
+
+<!-- 红色党建 -->
+<section class="party" id="party">
+  <h2>红色党建专题</h2>
+  <p>深入贯彻习近平新时代中国特色社会主义思想，为政府机关和企事业单位提供专业的党建活动策划与执行服务</p>
+  <button class="party-btn" onclick="alert('党建专题页面开发中，敬请期待！')">了解党建服务详情</button>
+</section>
+
+<!-- 3D流程演示 -->
+<section class="demo3d" id="demo">
+  <h2>服务流程3D演示</h2>
+  <p>展示政府项目标准操作流程</p>
+  <div class="demo-screen">
+    <div class="demo-step active">① 需求沟通<br>深入了解客户需求</div>
+    <div class="demo-step">② 方案设计<br>专业团队制定方案</div>
+    <div class="demo-step">③ 项目执行<br>高标准执行项目</div>
+    <div class="demo-step">④ 效果评估<br>项目成果验收评估</div>
+  </div>
+  <div class="demo-controls">
+    <button class="demo-btn" onclick="changeStep(0)">第一步</button>
+    <button class="demo-btn" onclick="changeStep(1)">第二步</button>
+    <button class="demo-btn" onclick="changeStep(2)">第三步</button>
+    <button class="demo-btn" onclick="changeStep(3)">第四步</button>
+  </div>
+</section>
+
+<!-- 页脚 -->
+<footer id="contact">
+  <p>© 2024 红色政务服务中心 | 京ICP备12345678号 | 地址：北京市朝阳区xxx路xxx号 | 电话：010-12345678</p>
+</footer>
+
+<!-- 浮动咨询 -->
+<div class="consult" onclick="toggleChat()">业务咨询</div>
+<div class="chat-window" id="chatWin">
+  <div class="chat-header"><span>业务咨询</span><span style="cursor:pointer" onclick="toggleChat()">×</span></div>
+  <div class="chat-body" id="chatBody"><div style="background:#f0f0f0;padding:8px;border-radius:4px;margin-bottom:10px;font-size:14px;">客服：您好！欢迎咨询，请问需要什么帮助？</div></div>
+  <div class="chat-input"><input id="chatInput" placeholder="请输入您的问题…"><button onclick="sendMsg()">发送</button></div>
+</div>
+
+<script>
+// 粒子背景
+const pContainer=document.getElementById('particles');
+for(let i=0;i<60;i++){
+  const d=document.createElement('div');d.className='particle';
+  d.style.left=Math.random()*100+'%';d.style.animationDelay=Math.random()*20+'s';
+  pContainer.appendChild(d);
+}
+// 滚动到业务区
+function scrollToServices(){document.getElementById('services').scrollIntoView({behavior:'smooth'});}
+// 3D流程步进
+let stepIndex=0;const steps=document.querySelectorAll('.demo-step');
+function changeStep(i){steps[stepIndex].classList.remove('active');stepIndex=i;steps[stepIndex].classList.add('active');}
+setInterval(()=>{changeStep((stepIndex+1)%4);},4000);
+// 咨询窗口
+function toggleChat(){const w=document.getElementById('chatWin');w.style.display=w.style.display==='flex'?'none':'flex';}
+function sendMsg(){const i=document.getElementById('chatInput');if(!i.value.trim())return;const b=document.getElementById('chatBody');b.innerHTML+=`<div style="text-align:right;font-size:14px;margin:8px 0;"><span style="background:var(--red);color:#fff;padding:6px 10px;border-radius:4px;">${i.value}</span></div>`;i.value='';b.scrollTop=b.scrollHeight;}
+// 业务详情 + 案例上传（常驻底部）
+function showDetail(type){
+  const data={
+    media:{title:'媒体宣传与运营',desc:'专业提供媒体宣传与运营全链条服务…',modules:['撰写新闻稿','官方平台宣传','多平台代运营','个人IP运营','MCN宣传']},
+    exhibition:{title:'会展论坛与活动',desc:'专注会展论坛策划执行…',modules:['会展举办','会展宣传资料拍摄','论坛举办','论坛宣传资料拍摄','企业年会','企业周年庆','企业运动会']},
+    cultural:{title:'文创与展厅设计',desc:'聚焦文创开发与空间视觉设计…',modules:['景区文创设计','企业文创设计','企业展厅设计与安装','文化墙设计与安装']},
+    opinion:{title:'舆情管理和预警',desc:'提供全流程舆情管理解决方案…',modules:['多平台舆情监控','舆情报警','舆情引导与处理']},
+    scenic:{title:'景区活动策划',desc:'专业景区活动策划服务…',modules:['景区开幕式方案策划','景区节日策划','景区海报设计','景区活动宣传','景区宣传片拍摄与剪辑']},
+    material:{title:'各种宣传物料',desc:'提供全链条宣传物料服务…',modules:['宣传片拍摄与剪辑','宣传照片拍摄与精修','海报设计','沙盘模型建造','H5页面制作','地铁宣传','平台宣传']}
+  };
+  const d=data[type];
+  const html=`
+    <div style="max-width:600px;margin:0 auto;background:#fff;border-radius:10px;padding:30px;max-height:80vh;overflow-y:auto;">
+      <h2 style="color:var(--red);margin-bottom:15px;">${d.title}</h2>
+      <p style="line-height:1.8;margin-bottom:20px;">${d.desc}</p>
+      <h3 style="margin:20px 0 10px;">业务模块</h3>
+      <ul style="columns:2;gap:20px;line-height:1.8;">${d.modules.map(m=>`<li>${m}</li>`).join('')}</ul>
+      <!-- 案例上传 -->
+      <div style="margin-top:25px;">
+        <input type="file" id="caseFile" accept=".jpg,.jpeg,.png,.mp4,.pptx" style="display:none;">
+        <span class="upload-btn" onclick="document.getElementById('caseFile').click()">上传案例</span>
+        <span id="uploadTip" style="margin-left:10px;font-size:13px;"></span>
+      </div>
+      <div style="margin-top:15px;text-align:right;"><button onclick="toggleChat()" class="upload-btn">立即咨询</button></div>
+      <div style="text-align:center;margin-top:15px;"><button onclick="document.body.removeChild(document.querySelector('.modal'))" style="background:var(--gray);color:#fff;border:none;padding:8px 20px;border-radius:4px;cursor:pointer;">关闭</button></div>
+    </div>
+  `;
+  const m=document.createElement('div');m.className='modal';m.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:2000;';m.innerHTML=html;document.body.appendChild(m);
+  // 绑定上传事件（弹窗已插入DOM）
+  document.getElementById('caseFile').addEventListener('change',async (e)=>{
+    const file=e.target.files[0]; if(!file) return;
+    const tip=document.getElementById('uploadTip'); tip.textContent='上传中...';
+    const fd=new FormData(); fd.append('case',file);
+    try{
+      const res=await fetch('http://localhost:3000/api/upload',{method:'POST',body:fd});
+      const j=await res.json();
+      if(j.url) tip.innerHTML=`<a href="${j.url}" target="_blank" style="color:#E2231A;">✅ 已上传 →</a>`;
+      else tip.textContent='上传失败';
+    }catch(e){tip.textContent='网络错误';}
+  });
+}
+
+// 智能导购：停留60s弹《政务活动报批指南》
+let enterTime=Date.now();setInterval(()=>{if(Date.now()-enterTime>60000&&!sessionStorage.getItem('guided')){sessionStorage.setItem('guided','1');if(confirm('您已浏览60秒，可免费下载《政务活动报批指南》PDF，是否立即领取？')){window.open('https://example.com/guide.pdf','_blank');}}},1000);
+</script>
+</body>
+</html>
